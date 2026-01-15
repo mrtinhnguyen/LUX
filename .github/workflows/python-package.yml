@@ -1,0 +1,63 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python package
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install uv
+      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    - name: Install dependencies
+      run: |
+        uv pip install --system --upgrade pip
+        uv pip install --system flake8 pytest
+        cd zon-format
+        uv pip install --system -e .
+    
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 zon-format/src --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 zon-format/src --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Test with pytest
+      run: |
+        cd zon-format
+        export PYTHONPATH=src
+        pytest tests/ -v
+    
+    - name: Test import
+      run: |
+        python -c "import sys; sys.path.insert(0, 'zon-format/src'); import zon; print('✓ ZON imported successfully')"
+    
+    - name: Test basic encode/decode
+      run: |
+        python -c "import sys; sys.path.insert(0, 'zon-format/src'); import zon; data = [{'id': 1, 'name': 'test'}]; encoded = zon.encode(data); decoded = zon.decode(encoded); assert decoded == data; print('✓ Basic encode/decode works')"
+
+    - name: Run Regression Benchmark
+      run: |
+        cd zon-format
+        python benchmarks/runners/comprehensive_benchmark.py

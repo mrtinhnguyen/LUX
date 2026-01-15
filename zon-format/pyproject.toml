@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lux-format"
+version = "1.2.1"
+description = "Lightweight Ultra-compressed Xchange v1.2.1 - Human-readable data format with 30%+ compression over JSON, now with adaptive encoding"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "TonyX", email = "hi@tonyx.dev"}
+]
+maintainers = [
+    {name = "TonyX", email = "hi@tonyx.dev"}
+]
+keywords = [
+    "lux",
+    "serialization",
+    "llm",
+    "compression",
+    "token-efficiency",
+    "data-format",
+    "json-alternative",
+    "toon",
+    "token-efficient",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://lux.tonyx.dev"
+Documentation = "https://github.com/mrtinhnguyen/LUX/blob/main/README.md"
+Repository = "https://github.com/mrtinhnguyen/LUX"
+Issues = "https://github.com/mrtinhnguyen/LUX/issues"
+
+[project.scripts]
+lux = "lux.cli:main"
+
+[tool.setuptools]
+packages = ["lux"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+lux = ["py.typed"]
