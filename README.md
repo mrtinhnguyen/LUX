@@ -1,21 +1,20 @@
-# Zero Overhead Notation (ZON) Format
+# LUX (Lightweight Ultra-compressed Xchange) Format
 
-[![GitHub stars](https://img.shields.io/github/stars/ZON-Format/ZON?style=social&label=Star)](https://github.com/ZON-Format/ZON)
-[![Downloads](https://static.pepy.tech/badge/zon-format/month)](https://pepy.tech/project/zon-format)
-[![PyPI version](https://img.shields.io/pypi/v/zon-format.svg)](https://pypi.org/project/zon-format/)
+[![GitHub stars](https://img.shields.io/github/stars/mrtinhnguyen/LUX?style=social&label=Star)](https://github.com/mrtinhnguyen/LUX)
+[![Downloads](https://static.pepy.tech/badge/lux-format/month)](https://pepy.tech/project/lux-format)
+[![PyPI version](https://img.shields.io/pypi/v/lux-format.svg)](https://pypi.org/project/lux-format/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Tests](https://img.shields.io/badge/tests-340%2F340%20passing-brightgreen.svg)](#quality--testing)
-![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/ZON-Format/ZON?utm_source=oss&utm_medium=github&utm_campaign=ZON-Format%2FZON&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ZON-Format/ZON)
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/mrtinhnguyen/LUX?utm_source=oss&utm_medium=github&utm_campaign=mrtinhnguyen%2FLUX&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-# ZON → JSON is dead. TOON was cute. ZON just won. (Python v1.2.0 - Now with Binary Format, Versioning & Enterprise Tools)
+# LUX → JSON is dead. TOON was cute. LUX just won. (Python v1.2.1 - Now with Binary Format, Versioning & Enterprise Tools)
 
-**Zero Overhead Notation** - A compact, human-readable way to encode JSON for LLMs.
+**Lightweight Ultra-compressed Xchange** - A compact, human-readable way to encode JSON for LLMs.
 
-**File Extension:** `.zonf` | **Media Type:** `text/zonf` | **Encoding:** UTF-8
+**File Extension:** `.luxf` | **Media Type:** `text/luxf` | **Encoding:** UTF-8
 
-ZON is a token-efficient serialization format designed for LLM workflows. It achieves 35-50% token reduction vs JSON through tabular encoding, single-character primitives, and intelligent compression (Delta, Dictionary) while maintaining 100% data fidelity.
+LUX is a token-efficient serialization format designed for LLM workflows. It achieves 35-50% token reduction vs JSON through tabular encoding, single-character primitives, and intelligent compression (Delta, Dictionary) while maintaining 100% data fidelity.
 
 Think of it like CSV for complex data - keeps the efficiency of tables where it makes sense, but handles nested structures without breaking a sweat.
 
@@ -25,23 +24,23 @@ Think of it like CSV for complex data - keeps the efficiency of tables where it 
 **Zero parsing overhead** — literally dumber than CSV, and that's why LLMs love it
 
 ```bash
-pip install zon-format
+pip install lux-format
 
 # Install with UV (5-10x faster than pip)
-uv pip install zon-format
+uv pip install lux-format
 
 # Or for UV-based projects
-uv add zon-format
+uv add lux-format
 ```
 
 > [!TIP]
-> The ZON format is stable, but it's also an evolving concept. There's no finalization yet, so your input is valuable. Contribute to the spec or share your feedback to help shape its future.
+> The LUX format is stable, but it's also an evolving concept. There's no finalization yet, so your input is valuable. Contribute to the spec or share your feedback to help shape its future.
 
 ---
 
 ## Table of Contents
 
-- [Why ZON?](#why-zon)
+- [Why LUX?](#why-lux)
 - [Key Features](#key-features)
 - [Benchmarks](#benchmarks)
 - [Installation & Quick Start](#installation--quick-start)
@@ -51,14 +50,14 @@ uv add zon-format
 
 ---
 
-## Why ZON?
+## Why LUX?
 
 AI is becoming cheaper and more accessible, but larger context windows allow for larger data inputs as well. **LLM tokens still cost money** – and standard JSON is verbose and token-expensive:
 
-> "Dropped ZON into my LangChain agent loop and my monthly bill dropped $400 overnight"
+> "Dropped LUX into my LangChain agent loop and my monthly bill dropped $400 overnight"
 > — every Python dev who tried it this week
 
-**ZON is the only format that wins (or ties for first) on every single LLM.**
+**LUX is the only format that wins (or ties for first) on every single LLM.**
 
 ---
 
@@ -82,7 +81,7 @@ Benchmarks test LLM comprehension using 24 data retrieval questions on gpt-5-nan
 Each format ranked by efficiency (accuracy percentage per 10,000 tokens):
 
 ```
-ZON            ████████████████████ 1430.6 acc%/10K │  99.0% acc │ 692 tokens 👑
+LUX            ████████████████████ 1430.6 acc%/10K │  99.0% acc │ 692 tokens 👑
 CSV            ███████████████████░ 1386.5 acc%/10K │  99.0% acc │ 714 tokens
 JSON compact   ████████████████░░░░ 1143.4 acc%/10K │  91.7% acc │ 802 tokens
 TOON           ████████████████░░░░ 1132.7 acc%/10K │  99.0% acc │ 874 tokens
@@ -92,7 +91,7 @@ JSON           ██████████░░░░░░░░░░  744
 *Efficiency score = (Accuracy % ÷ Tokens) × 10,000. Higher is better.*
 
 > [!TIP]
-> ZON achieves **99.0% accuracy** while using **20.8% fewer tokens** than TOON and **13.7% fewer** than Minified JSON.
+> LUX achieves **99.0% accuracy** while using **20.8% fewer tokens** than TOON and **13.7% fewer** than Minified JSON.
 
 #### Per-Model Comparison
 
@@ -100,7 +99,7 @@ Accuracy on the unified dataset with gpt-5-nano:
 
 ```
 gpt-5-nano (Azure OpenAI)
-→ ZON            ████████████████████  99.0% (306/309) │ 692 tokens
+→ LUX            ████████████████████  99.0% (306/309) │ 692 tokens
   TOON           ████████████████████  99.0% (306/309) │ 874 tokens
   CSV            ████████████████████  99.0% (306/309) │ 714 tokens
   JSON           ███████████████████░  96.8% (299/309) │ 1,300 tokens
@@ -108,18 +107,18 @@ gpt-5-nano (Azure OpenAI)
 ```
 
 > [!TIP]
-> ZON matches TOON's 100% accuracy while using **5.0% fewer tokens**.
+> LUX matches TOON's 100% accuracy while using **5.0% fewer tokens**.
 
 <details>
 <summary>### ⚡️ Token Efficiency (vs Compact JSON)</summary>
 
-| Tokenizer | ZON Savings | vs TOON | vs CSV |
+| Tokenizer | LUX Savings | vs TOON | vs CSV |
 | :--- | :--- | :--- | :--- |
 | **GPT-4o** | **-23.8%** 👑 | -36.1% | -12.9% |
 | **Claude 3.5** | **-21.3%** 👑 | -26.0% | -9.9% |
 | **Llama 3** | **-16.5%** 👑 | -26.6% | -9.2% |
 
-> **Note:** ZON is the *only* human-readable format that consistently beats CSV in token count while maintaining full structural fidelity.
+> **Note:** LUX is the *only* human-readable format that consistently beats CSV in token count while maintaining full structural fidelity.
 
 </details>
 
@@ -133,7 +132,7 @@ gpt-5-nano (Azure OpenAI)
 ### 📦 BYTE SIZES:
 ```
 CSV:              1,384 bytes
-ZON:              1,399 bytes
+LUX:              1,399 bytes
 TOON:             1,665 bytes
 JSON (compact):   1,854 bytes
 YAML:             2,033 bytes
@@ -144,7 +143,7 @@ XML:              3,235 bytes
 ```
 GPT-4o (o200k):
 
-    ZON          █████████░░░░░░░░░░░ 513 tokens 👑
+    LUX          █████████░░░░░░░░░░░ 513 tokens 👑
     CSV          ██████████░░░░░░░░░░ 534 tokens (+4.1%)
     JSON (cmp)   ███████████░░░░░░░░░ 589 tokens (+12.9%)
     TOON         ███████████░░░░░░░░░ 614 tokens (+19.7%)
@@ -155,7 +154,7 @@ GPT-4o (o200k):
 Claude 3.5 (Anthropic): 
 
     CSV          ██████████░░░░░░░░░░ 544 tokens 👑
-    ZON          ██████████░░░░░░░░░░ 548 tokens (+0.7%)
+    LUX          ██████████░░░░░░░░░░ 548 tokens (+0.7%)
     TOON         ██████████░░░░░░░░░░ 570 tokens (+4.0%)
     JSON (cmp)   ███████████░░░░░░░░░ 596 tokens (+8.1%)
     YAML         ████████████░░░░░░░░ 641 tokens (+17.0%)
@@ -164,7 +163,7 @@ Claude 3.5 (Anthropic):
 
 Llama 3 (Meta):
 
-    ZON          ██████████░░░░░░░░░░ 696 tokens 👑
+    LUX          ██████████░░░░░░░░░░ 696 tokens 👑
     CSV          ██████████░░░░░░░░░░ 728 tokens (+4.6%)
     JSON (cmp)   ███████████░░░░░░░░░ 760 tokens (+8.4%)
     TOON         ███████████░░░░░░░░░ 784 tokens (+12.6%)
@@ -177,7 +176,7 @@ Llama 3 (Meta):
 ```
 gpt-4o (o200k):
 
-    ZON          █████████░░░░░░░░░░░ 143,661 tokens 👑
+    LUX          █████████░░░░░░░░░░░ 143,661 tokens 👑
     CSV          ██████████░░░░░░░░░░ 164,919 tokens (+14.8%)
     JSON (cmp)   ███████████░░░░░░░░░ 188,604 tokens (+23.8%)
     TOON         █████████████░░░░░░░ 224,940 tokens (+56.6%)
@@ -187,7 +186,7 @@ gpt-4o (o200k):
 
 claude 3.5 (anthropic):
 
-    ZON          █████████░░░░░░░░░░░ 145,652 tokens 👑
+    LUX          █████████░░░░░░░░░░░ 145,652 tokens 👑
     CSV          ██████████░░░░░░░░░░ 161,701 tokens (+11.0%)
     JSON (cmp)   ███████████░░░░░░░░░ 185,136 tokens (+21.3%)
     TOON         ████████████░░░░░░░░ 196,893 tokens (+35.2%)
@@ -197,7 +196,7 @@ claude 3.5 (anthropic):
 
 llama 3 (meta):
 
-    ZON          ██████████░░░░░░░░░░ 230,838 tokens 👑
+    LUX          ██████████░░░░░░░░░░ 230,838 tokens 👑
     CSV          ███████████░░░░░░░░░ 254,181 tokens (+10.1%)
     JSON (cmp)   ████████████░░░░░░░░ 276,405 tokens (+16.5%)
     TOON         █████████████░░░░░░░ 314,824 tokens (+36.4%)
@@ -210,54 +209,54 @@ llama 3 (meta):
 ### Overall Summary:
 ```
 GPT-4o (o200k):
-  ZON Wins: 2/2 datasets
+  LUX Wins: 2/2 datasets
   
   Total tokens across all datasets:
-    ZON:         147,267 👑
+    LUX:         147,267 👑
     CSV:         165,647 (+12.5%)
     JSON (cmp):  189,193 (+28.4%)
     TOON:        225,510 (+53.1%)
     
-  ZON vs TOON: -34.7% fewer tokens ✨
-  ZON vs JSON: -22.2% fewer tokens
+  LUX vs TOON: -34.7% fewer tokens ✨
+  LUX vs JSON: -22.2% fewer tokens
 
 Claude 3.5 (Anthropic):
-  ZON Wins: 1/2 datasets
+  LUX Wins: 1/2 datasets
   
   Total tokens across all datasets:
-    ZON:         149,281 👑
+    LUX:         149,281 👑
     CSV:         162,245 (+8.7%)
     JSON (cmp):  185,732 (+24.4%)
     TOON:        197,463 (+32.3%)
     
-  ZON vs TOON: -24.4% fewer tokens ✨
-  ZON vs JSON: -19.6% fewer tokens
+  LUX vs TOON: -24.4% fewer tokens ✨
+  LUX vs JSON: -19.6% fewer tokens
 
 Llama 3 (Meta):
-  ZON Wins: 2/2 datasets
+  LUX Wins: 2/2 datasets
   
   Total tokens across all datasets:
-    ZON:         234,623 👑
+    LUX:         234,623 👑
     CSV:         254,909 (+8.7%)
     JSON (cmp):  277,165 (+18.1%)
     TOON:        315,608 (+34.5%)
     
-  ZON vs TOON: -25.7% fewer tokens ✨
-  ZON vs JSON: -15.3% fewer tokens
+  LUX vs TOON: -25.7% fewer tokens ✨
+  LUX vs JSON: -15.3% fewer tokens
 ```
 
 **Key Insights:**
 
-- ZON wins on all Llama 3 and GPT-4o tests (best token efficiency across both datasets).
-- Claude shows CSV has slight edge (0.2%) on simple tabular data, but ZON dominates on complex nested data.
+- LUX wins on all Llama 3 and GPT-4o tests (best token efficiency across both datasets).
+- Claude shows CSV has slight edge (0.2%) on simple tabular data, but LUX dominates on complex nested data.
 
 - **Average savings: 25-35% vs TOON, 15-28% vs JSON** across all tokenizers.
 
-- ZON wins on all Llama 3 and GPT-4o tests (best token efficiency across both datasets).
-- ZON is 2nd on Claude (CSV wins by only 0.2%, ZON still beats TOON by 4.6%).
-- ZON consistently outperforms TOON on every tokenizer (from 4.6% up to 34.8% savings).
+- LUX wins on all Llama 3 and GPT-4o tests (best token efficiency across both datasets).
+- LUX is 2nd on Claude (CSV wins by only 0.2%, LUX still beats TOON by 4.6%).
+- LUX consistently outperforms TOON on every tokenizer (from 4.6% up to 34.8% savings).
 
-**Key Insight:** ZON is the only format that wins or nearly wins across all models & datasets.
+**Key Insight:** LUX is the only format that wins or nearly wins across all models & datasets.
 
 ---
 
@@ -315,7 +314,7 @@ hikes[3]{id,name,distanceKm,elevationGain,companion,wasSunny}:
 
 </details>
 
-ZON conveys the same information with **even fewer tokens** than TOON – using compact table format with explicit headers:
+LUX conveys the same information with **even fewer tokens** than TOON – using compact table format with explicit headers:
 
 ```
 context.task:Our favorite hikes together
@@ -334,9 +333,9 @@ Building reliable LLM apps requires two things:
 1.  **Safety:** You need to validate outputs (like you do with Zod/Pydantic).
 2.  **Efficiency:** You need to compress inputs to save money.
 
-ZON is the only library that gives you **both in one package**.
+LUX is the only library that gives you **both in one package**.
 
-| Feature | Traditional Validation (e.g. Pydantic) | ZON |
+| Feature | Traditional Validation (e.g. Pydantic) | LUX |
 | :--- | :--- | :--- |
 | **Type Safety** | ✅ Yes | ✅ Yes |
 | **Runtime Validation** | ✅ Yes | ✅ Yes |
@@ -344,7 +343,7 @@ ZON is the only library that gives you **both in one package**.
 | **Prompt Generation** | ❌ Plugins needed | ✅ **Built-in** |
 | **Bundle Size** | ~Large | ⚡ **~5kb** |
 
-**The Sweet Spot:** Use ZON to **save money on Input Tokens** while keeping the strict safety you expect.
+**The Sweet Spot:** Use LUX to **save money on Input Tokens** while keeping the strict safety you expect.
 
 ---
 
@@ -353,7 +352,7 @@ ZON is the only library that gives you **both in one package**.
 - 🎯 **100% LLM Accuracy**: Achieves perfect retrieval (24/24 questions) with self-explanatory structure – no hints needed
 
 ### 3. Smart Flattening (Dot Notation)
-ZON automatically flattens top-level nested objects to reduce indentation.
+LUX automatically flattens top-level nested objects to reduce indentation.
 **JSON:**
 ```json
 {
@@ -364,13 +363,13 @@ ZON automatically flattens top-level nested objects to reduce indentation.
   }
 }
 ```
-**ZON:**
+**LUX:**
 ```
 config.database{host:localhost}
 ```
 
 ### 4. Colon-less Structure
-For nested objects and arrays, ZON omits the redundant colon, creating a cleaner, block-like structure.
+For nested objects and arrays, LUX omits the redundant colon, creating a cleaner, block-like structure.
 **JSON:**
 ```json
 {
@@ -380,7 +379,7 @@ For nested objects and arrays, ZON omits the redundant colon, creating a cleaner
   }
 }
 ```
-**ZON:**
+**LUX:**
 ```
 user{name:Alice,roles[admin,dev]}
 ```
@@ -399,7 +398,7 @@ user{name:Alice,roles[admin,dev]}
 
 ### Eval-Safe Design
 
-ZON is **immune to code injection attacks** that plague other formats:
+LUX is **immune to code injection attacks** that plague other formats:
 
 ✅ **No eval()** - Pure data format, zero code execution
 ✅ **No object constructors** - Unlike YAML's `!!python/object` exploit
@@ -410,7 +409,7 @@ ZON is **immune to code injection attacks** that plague other formats:
 
 | Format | Eval Risk | Code Execution |
 |--------|-----------|----------------|
-| **ZON** | ✅ None | Impossible |
+| **LUX** | ✅ None | Impossible |
 | **JSON** | ✅ Safe | When not using `eval()` |
 | **YAML** | ❌ High | `!!python/object/apply` RCE |
 | **TOON** | ✅ Safe | Type-agnostic, no eval |
@@ -429,12 +428,12 @@ ZON is **immune to code injection attacks** that plague other formats:
 
 ## New in v1.2.0: Enterprise Features
 
-### Binary Format (ZON-B)
+### Binary Format (LUX-B)
 
 Compact binary encoding with 40-60% space savings vs JSON:
 
 ```python
-from zon import encode_binary, decode_binary
+from lux import encode_binary, decode_binary
 
 # Encode to binary
 data = {"users": [{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}]}
@@ -446,7 +445,7 @@ decoded = decode_binary(binary)
 
 **Features:**
 - MessagePack-inspired format with magic header (`ZNB\x01`)
-- Full type support for all ZON primitives
+- Full type support for all LUX primitives
 - Perfect round-trip fidelity
 - Ideal for storage, APIs, and network transmission
 
@@ -455,7 +454,7 @@ decoded = decode_binary(binary)
 Document-level schema versioning with automatic migrations:
 
 ```python
-from zon import embed_version, extract_version, ZonMigrationManager
+from lux import embed_version, extract_version, ZonMigrationManager
 
 # Embed version metadata
 versioned = embed_version(data, "2.0.0", "user-schema")
@@ -482,7 +481,7 @@ migrated = manager.migrate(old_data, "1.0.0", "2.0.0")
 Three encoding modes optimized for different use cases:
 
 ```python
-from zon import encode_adaptive, recommend_mode, AdaptiveEncodeOptions
+from lux import encode_adaptive, recommend_mode, AdaptiveEncodeOptions
 
 # Auto-recommend best mode
 recommendation = recommend_mode(data)
@@ -507,7 +506,7 @@ llm = encode_adaptive(data, AdaptiveEncodeOptions(mode='llm-optimized'))
 | **llm-optimized** | AI workflows | true/false booleans, no type coercion |
 
 **Readable Mode Example:**
-```zon
+```lux
 metadata:{
   generated:2025-01-01T12:00:00Z
   version:1.2.0
@@ -520,24 +519,24 @@ users:@(2):id,name,role
 
 ### Developer Tools
 
-Comprehensive utilities for working with ZON data:
+Comprehensive utilities for working with LUX data:
 
 ```python
-from zon import size, compare_formats, analyze, ZonValidator
+from lux import size, compare_formats, analyze, ZonValidator
 
 # Analyze data size across formats
 comparison = compare_formats(data)
 # {'json': {'size': 1200, 'percentage': 100.0},
-#  'zon': {'size': 800, 'percentage': 66.7},
+#  'lux': {'size': 800, 'percentage': 66.7},
 #  'binary': {'size': 480, 'percentage': 40.0}}
 
 # Data complexity analysis
 analysis = analyze(data)
-# {'depth': 3, 'complexity': 'moderate', 'recommended_format': 'zon'}
+# {'depth': 3, 'complexity': 'moderate', 'recommended_format': 'lux'}
 
 # Enhanced validation
 validator = ZonValidator()
-result = validator.validate(zon_string)
+result = validator.validate(lux_string)
 if not result.is_valid:
     for error in result.errors:
         print(f"Error at line {error.line}: {error.message}")
@@ -545,7 +544,7 @@ if not result.is_valid:
 
 **Tools Available:**
 - `size()` - Calculate data size in different formats
-- `compare_formats()` - Compare JSON/ZON/Binary sizes
+- `compare_formats()` - Compare JSON/LUX/Binary sizes
 - `analyze()` - Comprehensive data structure analysis
 - `infer_schema()` - Automatic schema inference
 - `ZonValidator` - Enhanced validation with linting rules
@@ -554,7 +553,7 @@ if not result.is_valid:
 ### Complete API
 
 ```python
-from zon import (
+from lux import (
     # Core encoding
     encode, decode, encode_llm,
     
@@ -603,13 +602,13 @@ Automatic protection against malicious input:
 **Enabled by default** - validates table structure:
 
 ```python
-import zon
+import lux
 
 # Strict mode (default)
-data = zon.decode(zon_string)
+data = lux.decode(lux_string)
 
 # Non-strict mode
-data = zon.decode(zon_string, strict=False)
+data = lux.decode(lux_string, strict=False)
 ```
 
 **Error codes:** E001 (row count), E002 (field count)
@@ -622,16 +621,16 @@ data = zon.decode(zon_string, strict=False)
 
 **Using pip (traditional):**
 ```bash
-pip install zon-format
+pip install lux-format
 ```
 
 **Using UV (faster alternative):**
 ```bash
 # Install with UV (5-10x faster than pip)
-uv pip install zon-format
+uv pip install lux-format
 
 # Or for UV-based projects
-uv add zon-format
+uv add lux-format
 ```
 
 > **What is UV?** [UV](https://github.com/astral-sh/uv) is a blazing-fast Python package installer and resolver, written in Rust. It's a drop-in replacement for pip that's 10-100x faster.
@@ -639,7 +638,7 @@ uv add zon-format
 ### Basic Usage
 
 ```python
-import zon
+import lux
 
 # Your data
 data = {
@@ -649,41 +648,41 @@ data = {
     ]
 }
 
-# Encode to ZON
-encoded = zon.encode(data)
+# Encode to LUX
+encoded = lux.encode(data)
 print(encoded)
 # users:@(2):active,id,name,role
 # T,1,Alice,admin
 # T,2,Bob,user
 
 # Decode back
-decoded = zon.decode(encoded)
+decoded = lux.decode(encoded)
 assert decoded == data  # ✓ Lossless!
 ```
 
 ### Command Line Interface (CLI)
 
-The ZON package includes a CLI tool for converting files between JSON and ZON format.
+The LUX package includes a CLI tool for converting files between JSON and LUX format.
 
 **Usage:**
 
 ```bash
-# Encode JSON to ZON format
-zon encode data.json > data.zonf
+# Encode JSON to LUX format
+lux encode data.json > data.luxf
 
-# Decode ZON back to JSON
-zon decode data.zonf > output.json
+# Decode LUX back to JSON
+lux decode data.luxf > output.json
 ```
 
 **File Extension:**
 
-ZON files conventionally use the `.zonf` extension to distinguish them from other formats.
+LUX files conventionally use the `.luxf` extension to distinguish them from other formats.
 
 ---
 
 ## Format Overview
 
-ZON auto-selects the optimal representation for your data.
+LUX auto-selects the optimal representation for your data.
 
 ### Tabular Arrays
 
@@ -710,7 +709,7 @@ config:"{database:{host:db.example.com,port:5432},features:{darkMode:T}}"
 
 ### Mixed Structures
 
-ZON intelligently combines formats:
+LUX intelligently combines formats:
 
 ```
 metadata:"{version:1.0.4,env:production}"
@@ -725,7 +724,7 @@ logs:"[{id:101,level:INFO},{id:102,level:WARN}]"
 
 ## Encoding Modes (New in v1.2.0)
 
-ZON now provides **three encoding modes** optimized for different use cases:
+LUX now provides **three encoding modes** optimized for different use cases:
 
 ### Mode Overview
 
@@ -738,7 +737,7 @@ ZON now provides **three encoding modes** optimized for different use cases:
 ### Adaptive Encoding
 
 ```python
-from zon import encode_adaptive, AdaptiveEncodeOptions, recommend_mode
+from lux import encode_adaptive, AdaptiveEncodeOptions, recommend_mode
 
 # Use compact mode (default - maximum compression)
 output = encode_adaptive(data)
@@ -775,14 +774,14 @@ print(f"Use {recommendation['mode']} mode: {recommendation['reason']}")
 
 ## API Reference
 
-### `zon.encode(data: Any) -> str`
+### `lux.encode(data: Any) -> str`
 
-Encodes Python data to ZON format.
+Encodes Python data to LUX format.
 
 ```python
-import zon
+import lux
 
-zon_str = zon.encode({
+lux_str = lux.encode({
     "users": [
         {"id": 1, "name": "Alice"},
         {"id": 2, "name": "Bob"}
@@ -790,14 +789,14 @@ zon_str = zon.encode({
 })
 ```
 
-**Returns:** ZON-formatted string
+**Returns:** LUX-formatted string
 
-### `zon.encode_adaptive(data: Any, options: AdaptiveEncodeOptions = None) -> str`
+### `lux.encode_adaptive(data: Any, options: AdaptiveEncodeOptions = None) -> str`
 
 Encodes Python data using adaptive mode selection (New in v1.2.0).
 
 ```python
-from zon import encode_adaptive, AdaptiveEncodeOptions
+from lux import encode_adaptive, AdaptiveEncodeOptions
 
 # Compact mode (default)
 output = encode_adaptive(data)
@@ -816,14 +815,14 @@ result = encode_adaptive(
 print(result.decisions)  # See encoding decisions
 ```
 
-**Returns:** ZON-formatted string or `AdaptiveEncodeResult` if debug=True
+**Returns:** LUX-formatted string or `AdaptiveEncodeResult` if debug=True
 
-### `zon.recommend_mode(data: Any) -> dict`
+### `lux.recommend_mode(data: Any) -> dict`
 
 Analyzes data and recommends optimal encoding mode (New in v1.2.0).
 
 ```python
-from zon import recommend_mode
+from lux import recommend_mode
 
 recommendation = recommend_mode(my_data)
 print(f"Use {recommendation['mode']} mode")
@@ -833,14 +832,14 @@ print(f"Reason: {recommendation['reason']}")
 
 **Returns:** Dictionary with mode, confidence, reason, and metrics
 
-### `zon.decode(zon_string: str, strict: bool = True) -> Any`
+### `lux.decode(lux_string: str, strict: bool = True) -> Any`
 
-Decodes ZON format back to Python data.
+Decodes LUX format back to Python data.
 
 ```python
-import zon
+import lux
 
-data = zon.decode("""
+data = lux.decode("""
 users:@(2):id,name
 1,Alice
 2,Bob
@@ -851,19 +850,19 @@ users:@(2):id,name
 
 ```python
 # Strict mode (default) - validates table structure
-data = zon.decode(zon_string)
+data = lux.decode(lux_string)
 
 # Non-strict mode - allows row/field count mismatches  
-data = zon.decode(zon_string, strict=False)
+data = lux.decode(lux_string, strict=False)
 ```
 
 **Error Handling:**
 
 ```python
-from zon import decode, ZonDecodeError
+from lux import decode, ZonDecodeError
 
 try:
-    data = decode(invalid_zon)
+    data = decode(invalid_lux)
 except ZonDecodeError as e:
     print(e.code)    # "E001" or "E002"
     print(e.message) # Detailed error message
@@ -875,7 +874,7 @@ except ZonDecodeError as e:
 
 ## Runtime Evals (Schema Validation)
 
-ZON includes a built-in validation layer designed for **LLM Guardrails**.
+LUX includes a built-in validation layer designed for **LLM Guardrails**.
 Instead of just parsing data, you can enforce a schema to ensure the LLM output matches your expectations.
 
 ### Why use this?
@@ -886,19 +885,19 @@ Instead of just parsing data, you can enforce a schema to ensure the LLM output 
 ### Usage
 
 ```python
-from zon import zon, validate
+from lux import lux, validate
 
 # 1. Define the Schema (The "Source of Truth")
-UserSchema = zon.object({
-    'name': zon.string().describe("The user's full name"),
-    'age': zon.number().describe("Age in years"),
-    'role': zon.enum(['admin', 'user']).describe("Access level"),
-    'tags': zon.array(zon.string()).optional()
+UserSchema = lux.object({
+    'name': lux.string().describe("The user's full name"),
+    'age': lux.number().describe("Age in years"),
+    'role': lux.enum(['admin', 'user']).describe("Access level"),
+    'tags': lux.array(lux.string()).optional()
 })
 
 # 2. Generate the System Prompt (The "Input")
 system_prompt = f"""
-You are an API. Respond in ZON format with this structure:
+You are an API. Respond in LUX format with this structure:
 {UserSchema.to_prompt()}
 """
 
@@ -916,20 +915,20 @@ result = validate(llm_output, UserSchema)
 
 ### 💡 The "Input Optimization" Workflow (Best Practice)
 
-The most practical way to use ZON is to **save money on Input Tokens** while keeping your backend compatible with JSON.
+The most practical way to use LUX is to **save money on Input Tokens** while keeping your backend compatible with JSON.
 
-**1. Input (ZON):** Feed the LLM massive datasets in ZON (saving ~50% tokens).
+**1. Input (LUX):** Feed the LLM massive datasets in LUX (saving ~50% tokens).
 **2. Output (JSON):** Ask the LLM to reply in standard JSON.
 
 ```python
-import zon
+import lux
 
 # 1. Encode your massive context (Save 50% tokens!)
-context = zon.encode(large_dataset)
+context = lux.encode(large_dataset)
 
 # 2. Send to LLM
 prompt = f"""
-Here is the data in ZON format:
+Here is the data in LUX format:
 {context}
 
 Analyze this data and respond in standard JSON format with the following structure:
@@ -941,16 +940,16 @@ Analyze this data and respond in standard JSON format with the following structu
 ```
 
 This gives you the **best of both worlds**:
-- **Cheaper API Calls** (ZON Input)
+- **Cheaper API Calls** (LUX Input)
 - **Zero Code Changes** (JSON Output)
 
 ### Supported Types
-- `zon.string()`
-- `zon.number()`
-- `zon.boolean()`
-- `zon.enum(['a', 'b'])`
-- `zon.array(schema)`
-- `zon.object({ 'key': schema })`
+- `lux.string()`
+- `lux.number()`
+- `lux.boolean()`
+- `lux.enum(['a', 'b'])`
+- `lux.array(schema)`
+- `lux.object({ 'key': schema })`
 - `.optional()` modifier
 
 ---
@@ -960,19 +959,19 @@ This gives you the **best of both worlds**:
 ### OpenAI
 
 ```python
-import zon
+import lux
 import openai
 
 users = [{"id": i, "name": f"User{i}", "active": True} for i in range(100)]
 
-# Compress with ZON (saves tokens = saves money!)
-zon_data = zon.encode(users)
+# Compress with LUX (saves tokens = saves money!)
+lux_data = lux.encode(users)
 
 response = openai.ChatCompletion.create(
     model="gpt-4",
     messages=[
-        {"role": "system", "content": "You will receive data in ZON format."},
-        {"role": "user", "content": f"Analyze this user data:\n\n{zon_data}"}
+        {"role": "system", "content": "You will receive data in LUX format."},
+        {"role": "user", "content": f"Analyze this user data:\n\n{lux_data}"}
     ]
 )
 ```
@@ -981,10 +980,10 @@ response = openai.ChatCompletion.create(
 
 ```python
 from langchain.llms import OpenAI
-import zon
+import lux
 
 products = [{"name": "Laptop", "price": 999, "rating": 4.5}, ...]
-zon_products = zon.encode(products)
+lux_products = lux.encode(products)
 
 # Use in your LangChain prompts with fewer tokens!
 ```
@@ -993,10 +992,10 @@ zon_products = zon.encode(products)
 
 ## Documentation
 
-Comprehensive guides and references are available in the [`zon-format/docs/`](./zon-format/docs/) directory:
+Comprehensive guides and references are available in the [`lux-format/docs/`](./lux-format/docs/) directory:
 
-### 📖 [Syntax Cheatsheet](./zon-format/docs/syntax-cheatsheet.md)
-Quick reference for ZON format syntax with practical examples.
+### 📖 [Syntax Cheatsheet](./lux-format/docs/syntax-cheatsheet.md)
+Quick reference for LUX format syntax with practical examples.
 
 **What's inside:**
 - Basic types and primitives (strings, numbers, booleans, null)
@@ -1010,8 +1009,8 @@ Quick reference for ZON format syntax with practical examples.
 
 ---
 
-### 🔧 [API Reference](./zon-format/docs/api-reference.md)
-Complete API documentation for `zon-format` v1.0.4.
+### 🔧 [API Reference](./lux-format/docs/api-reference.md)
+Complete API documentation for `lux-format` v1.0.4.
 
 **What's inside:**
 - `encode()` function - detailed parameters and examples
@@ -1025,24 +1024,24 @@ Comprehensive formal specification including:
 - Security model (DOS prevention, no eval)
 - Data type system and preservation guarantees
 - Conformance checklists
-- Media type specification (`.zonf`, `text/zon`)
+- Media type specification (`.luxf`, `text/lux`)
 - Examples and appendices
 
 ### 📚 Other Documentation
 
-- **[API Reference](./zon-format/docs/api-reference.md)** - Encoder/decoder API, options, error codes
-- **[Syntax Cheatsheet](./zon-format/docs/syntax-cheatsheet.md)** - Quick reference guide
-- **[LLM Best Practices](./zon-format/docs/llm-best-practices.md)** - Using ZON with LLMs
+- **[API Reference](./lux-format/docs/api-reference.md)** - Encoder/decoder API, options, error codes
+- **[Syntax Cheatsheet](./lux-format/docs/syntax-cheatsheet.md)** - Quick reference guide
+- **[LLM Best Practices](./lux-format/docs/llm-best-practices.md)** - Using LUX with LLMs
 
 ---
 
 ## Links
 
-- [PyPI Package](https://pypi.org/project/zon-format/)
-- [Changelog](./zon-format/CHANGELOG.md)
-- [GitHub Repository](https://github.com/ZON-Format/ZON)
-- [GitHub Issues](https://github.com/ZON-Format/ZON/issues)
-- [TypeScript Implementation](https://github.com/ZON-Format/zon-TS)
+- [PyPI Package](https://pypi.org/project/lux-format/)
+- [Changelog](./lux-format/CHANGELOG.md)
+- [GitHub Repository](https://github.com/LUX-Format/LUX)
+- [GitHub Issues](https://github.com/LUX-Format/LUX/issues)
+- [TypeScript Implementation](https://github.com/LUX-Format/lux-TS)
 
 ---
 
@@ -1058,7 +1057,7 @@ Contributions welcome! Please:
 
 ## License
 
-Copyright (c) 2025 ZON-FORMAT (Roni Bhakta)
+Copyright (c) 2025 LUX-FORMAT (Roni Bhakta)
 
 MIT License - see [LICENSE](LICENSE) for details.
 
@@ -1066,4 +1065,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 **Made with ❤️ for the LLM community**
 
-*ZON v1.2.0 - Token efficiency that scales with complexity, now with adaptive encoding*
+*LUX v1.2.0 - Token efficiency that scales with complexity, now with adaptive encoding*
