@@ -1,7 +1,6 @@
 # LUX (Lightweight Ultra-compressed Xchange) Format
 
 [![GitHub stars](https://img.shields.io/github/stars/mrtinhnguyen/LUX?style=social&label=Star)](https://github.com/mrtinhnguyen/LUX)
-[![Downloads](https://static.pepy.tech/badge/lux-format/month)](https://pepy.tech/project/lux-format)
 [![PyPI version](https://img.shields.io/pypi/v/lux-format.svg)](https://pypi.org/project/lux-format/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Tests](https://img.shields.io/badge/tests-340%2F340%20passing-brightgreen.svg)](#quality--testing)
